@@ -29,7 +29,7 @@ router.post('/', async (req: Request, res: Response) => {
     const recommendations = await generateRecommendations(userInput)
 
     // Enrich with platform search links
-    const enrichedRecommendations = recommendations.map((item: any) => ({
+    const enrichedRecommendations = recommendations.map((item: any) => ({ // eslint-disable-line @typescript-eslint/no-explicit-any
       ...item,
       platforms: {
         taobao: `https://s.taobao.com/search?q=${encodeURIComponent(item.name)}`,

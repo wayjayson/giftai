@@ -96,7 +96,6 @@ export const generateRecommendations = async (userInput: UserInput) => {
     })
 
     const content = completion.choices[0].message.content
-    console.log('DeepSeek Raw Response:', content) // Debug log
 
     // Robust JSON extraction
     let jsonString = content || ''

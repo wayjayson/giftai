@@ -4,6 +4,7 @@ import { useGiftStore } from '../store/useGiftStore';
 import { Button } from '../components/common/Button';
 import { Plus, X } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useToast } from '@/hooks/useToast';
 
 const PREDEFINED_HOBBIES = [
   '摄影', '旅行', '阅读', '美食', '运动', '音乐', 
@@ -19,6 +20,7 @@ const PREDEFINED_OCCASIONS = [
 const FormPage: React.FC = () => {
   const navigate = useNavigate();
   const { userInput, setUserInput, setStep, setIsLoading, setRecommendations, setError } = useGiftStore();
+  const { Toast, showToast } = useToast();
   
   const [customHobby, setCustomHobby] = useState('');
   const [customOccasion, setCustomOccasion] = useState('');
@@ -62,7 +64,7 @@ const FormPage: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!userInput.gender || userInput.hobbies.length === 0 || !userInput.occasion) {
-      alert('请填写完整信息哦~');
+      showToast('请填写完整信息哦~', 'error');
       return;
     }
 
@@ -97,6 +99,7 @@ const FormPage: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-6 md:p-10 animate-fade-in-up">
+      <Toast />
       <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">告诉我们关于TA的细节</h2>
 
       {/* Gender Selection */}
